@@ -302,10 +302,14 @@ main>h5{
       margin-left: 0;
       text-align: center;
     }
+    .library, .bookForm{
+      transform:scale(0.7);
+  
+    }
+    .bookForm{
+      margin-top: 30vh;
+    }
   }
 
-  .library, .bookForm{
-    transform:scale(0.7)
-  }
 
   
