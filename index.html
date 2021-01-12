@@ -14,26 +14,29 @@
     </head>
     <body>
         <header>
-            <h1>Library</h1>
+            <div>
+            <div class="logo"></div>
+            <h1>The Library</h1>
+            </div>
+            <h2>Track your Books</h2>
         </header>
-        <div class="newBookButton"> add</div>
-        <form class="bookForm"> 
-            Title
-            <input id="title" name="title" placeholder="Title" type="text">
-            Author
-            <input id="author" name="author" placeholder="Author" type="text">
-            Pages
-            <input id="pages" name="pages" placeholder="Number of Pages" type="number">
-            <label for="have_you_read">Completed?</label>
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-           
-            <input type="button" class="create" value="Add Book"></input>
-        </form>
         <main>
-        </main>
+            <h5>Add a Book</h5>
+            <div class="newBookButton">+</div>
+            <div class="modal">
+                <form class="bookForm"> 
+                    <span class="close">&times;</span>
+                    <h3>Title</h3>
+                    <input id="title" name="title" placeholder="Title" type="text">
+                    <h3>Author</h3>
+                    <input id="author" name="author" placeholder="Author" type="text">
+                    <h3>Pages</h3>
+                    <input id="pages" name="pages" placeholder="Number of Pages" type="number">
+                    <input type="button" class="create" value="Add"></input>
+                </form>
+            </div>
+            <div class="library"> </div>
+        </main> 
         
         <script src="javascript.js" async defer></script>
     </body>

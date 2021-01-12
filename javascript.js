@@ -1,10 +1,12 @@
-let library = document.querySelector('main');
+let library = document.querySelector('.library');
 let inputTitle = document.getElementById('title');
 let inputAuthor = document.querySelector('#author');
 let inputPages = document.querySelector('#pages');
 let createButton = document.querySelector('.create')
 let bookForm = document.querySelector('.bookForm');
 let newBookButton = document.querySelector('.newBookButton');
+let modal = document.querySelector('.modal');
+let closeModal = document.querySelector('.close');
 
 
 let myLibrary = [];
@@ -26,36 +28,47 @@ function addBookToLibrary(title = inputTitle.value, author = inputAuthor.value, 
 function displayBooks(myLibrary){
     
 
-    for (let i=0; i < myLibrary.length; i++) {
+    for (let i=myLibrary.length-1; i < myLibrary.length; i++) {
         let div = document.createElement("div");
         div.setAttribute('class', 'newBook');
         div.dataset.index = i;
         let deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
+        deleteButton.innerHTML = "&times";
         let titleOfBook = document.createElement("h3");
-        let author = document.createElement("h5");
-        let pages = document.createElement("h6")
-        titleOfBook.textContent = myLibrary[i]. title
-        author.textContent = myLibrary[i]. author
-        pages.textContent = myLibrary[i]. pages
+        let author = document.createElement("h4");
+        let pages = document.createElement("h5");
+        titleOfBook.textContent = myLibrary[i]. title;
+        author.textContent =myLibrary[i]. author;
+        pages.textContent = "Pages: " + myLibrary[i]. pages;
         let readSwitch = document.createElement("label");
+        let read = document.createElement("h6");
+        read.className = "completed";
+        read.textContent = "Completed";
         readSwitch.className = "switch";
         let inputRead = document.createElement("input");
         inputRead.type = "checkbox";
         let sliderRound = document.createElement("span");
         sliderRound.className = "slider round";
         readSwitch.append(inputRead, sliderRound);
-        div.append(deleteButton, titleOfBook, author, pages, readSwitch);
+        let completedDiv = document.createElement("div");
+        completedDiv.className = "container-switch";
+        completedDiv.append(read, readSwitch);
+        div.append(deleteButton, titleOfBook, author, pages, completedDiv);
         library.append(div);
 
 
     
         deleteButton.addEventListener('click', function(e){
             var element = document.body.querySelector(`.newBook[data-index="${div.dataset.index}"]`);
-            console.log(`${div.dataset.index}`)
-            myLibrary.splice(`${div.dataset.index}`, 1);
-            library.querySelectorAll('.newBook').forEach(n => n.remove());
-            displayBooks(myLibrary);
+            element.className = `newBook ${div.dataset.index}`;
+            console.log(element);
+            // console.log(`${div.dataset.index}`)
+            myLibrary[`${div.dataset.index}`] = "";
+            element.classList.remove('newBook');
+            element.remove(inputRead, sliderRound)
+        
+        
+            
             
         })
 
@@ -71,15 +84,20 @@ function displayBooks(myLibrary){
 createButton.addEventListener('click', function(e){
     
     addBookToLibrary();
-    library.querySelectorAll('.newBook').forEach(n => n.remove());
+    // library.querySelectorAll('.newBook').forEach(n => n.remove());
     displayBooks(myLibrary);
-    bookForm.style.visibility = "hidden";
+    modal.style.display = "none";
+    bookForm.reset();
     
 });
 
 
 newBookButton.addEventListener('click', function(e) {
-    bookForm.style.visibility = "visible";
+   modal.style.display = "block";
+});
+
+closeModal.addEventListener('click', function(e){
+    modal.style.display = "none";
 })
 
 // = document.getElementById('title').value,
